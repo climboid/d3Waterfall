@@ -17,13 +17,16 @@
   <script>
   var waterfall = {
       container:'chart',
-      borderRadius:15,
-      pills:[
-        {"name":"Sales","y":170},
-        {"name":"Turns","y":240},
-        {"name":"Margin","y":310},
-        {"name":"TCR","sub":1,"y":380}
-      ],
+      width:400,
+      height:800,
+      fontSize:10,
+      borderRadius:5,
+      // rowLabels:[
+      //   {"name":"Sales","y":170},
+      //   {"name":"Turns","y":240},
+      //   {"name":"Margin","y":310},
+      //   {"name":"TCR","sub":1,"y":380}
+      // ],
       chartContainerTitles:[{
         "title":"What causes the industry to perform",
         "title2":"differently than the market ?"
@@ -35,37 +38,17 @@
         {'value':1440},
         {'value':-1918},
         {'value':30},
+        {'value':222},
+        {'value':253},
+        {'value':417},
+        {'value':1440},
+        {'value':-1918},
+        {'value':30},
         {'value':222}
       ]
     }
 
     createWaterfall(waterfall);
-
-    var obj = {
-      container:'chart2',
-      borderRadius:15,
-      chartContainerTitles:[{
-        "title":"What causes the company to perform",
-        "title2":"differently than the industry ?"
-      }],
-      innerChartPills:[
-        {"name":"Industry","y":85},
-        {"name":"Company","y":470}
-      ],
-      horizontalGridLines:true,
-      series:[
-        {'value':505},
-        {'value':127},
-        {'value':-1101},
-        {'value':511},
-        {'value':467},
-        {'value':226},
-      ],
-      beziers:true,
-      potatoLbl:["Company","effect"]
-    }
-
-    createWaterfall(obj);
 
 
   </script>

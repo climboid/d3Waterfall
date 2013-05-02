@@ -4,8 +4,6 @@ You basically provide an object to the Waterfall function and it will spit out a
 You will need a container in you HTML which ID matches the container property of the config object like so
 <pre>
   <code>
-    .
-    .
     &lsaquo;body&rsaquo;
        &lsaquo;div id="chart"&rsaquo; &lsaquo;/div&rsaquo;
        &lsaquo;script src="libs/d3.v3.min.js"&rsaquo; &lsaquo;/script&rsaquo;

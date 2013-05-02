@@ -6,10 +6,10 @@ You will need a container in you HTML which ID matches the container property of
   <code>
     .
     .
-    <body>
-      <div id="chart"></div>
-      <script src="libs/d3.v3.min.js"></script>
-    </body>
+    &lsaquo;body&rsaquo;
+       &lsaquo;div id="chart"&rsaquo; &lsaquo;/div&rsaquo;
+       &lsaquo;script src="libs/d3.v3.min.js"&rsaquo; &lsaquo;/script&rsaquo;
+     &lsaquo;/body&rsaquo;
   </code>
 </pre>
 Once the HTML is set you create the config object as follows

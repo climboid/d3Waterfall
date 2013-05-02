@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title></title>
+  <script src="libs/d3.v3.min.js"></script>
+  <link rel="stylesheet" type="text/css" href="styles/waterfallChart.css">
+</head>
+<body>
+  <div id="slideTitle"></div>
+  <div id="chart" class="waterfallChart"></div>
+  <div id="chart2" class="waterfallChart"></div>
+  <div class="clearfix"></div>
+
+  
+  <script src="scripts/waterfall.js"></script>
+  <script>
+
+  var slideTitles = {
+      container:'slideTitle',
+      borderRadius:15,
+      title1:'GENERATING',
+      title2:'Industry and company effect on your economic profit, by driver',
+      title3:'Contribution of each driver to economic profit, USD millions pa, 2007-11 average',
+      title4:'AT&T Inc',
+  }
+
+  createWaterfallSlideTitles(slideTitles);
+
+  var waterfall = {
+      container:'chart',
+      borderRadius:15,
+      pills:[
+        {"name":"Sales","y":170},
+        {"name":"Turns","y":240},
+        {"name":"Margin","y":310},
+        {"name":"TCR","sub":1,"y":380}
+      ],
+      yAxisLabel:"Diffferences in ... 2",
+      chartContainerTitles:[{
+        "title":"What causes the industry to perform",
+        "title2":"differently than the market ?"
+      }],
+      innerChartPills:[
+        {"name":"Market","y":85},
+        {"name":"Industry","y":470}
+      ],
+      horizontalGridLines:true,
+      series:[
+        {'value':253},
+        {'value':417},
+        {'value':1440},
+        {'value':-1918},
+        {'value':30},
+        {'value':222}
+      ],
+      beziers:true,
+      potatoLbl:["Industry","effect"]
+    }
+
+    createWaterfall(waterfall);
+
+    var obj = {
+      container:'chart2',
+      borderRadius:15,
+      chartContainerTitles:[{
+        "title":"What causes the company to perform",
+        "title2":"differently than the industry ?"
+      }],
+      innerChartPills:[
+        {"name":"Industry","y":85},
+        {"name":"Company","y":470}
+      ],
+      horizontalGridLines:true,
+      series:[
+        {'value':505},
+        {'value':127},
+        {'value':-1101},
+        {'value':511},
+        {'value':467},
+        {'value':226},
+      ],
+      beziers:true,
+      potatoLbl:["Company","effect"]
+    }
+
+    createWaterfall(obj);
+
+
+  </script>
+</body>
+</html>

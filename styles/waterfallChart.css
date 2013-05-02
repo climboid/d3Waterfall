@@ -1,0 +1,95 @@
+body{
+  font-family:"Helvetica Neue",Helvetica;
+}
+
+#slideTitle{
+  display:block;
+  width:1024px;
+}
+
+.waterfallChart{
+  float:left;
+  /*width:512px;*/
+}
+
+.clearfix{
+  clear:both;
+}
+
+.firstHeader{
+  font-size:24px;
+  fill:#808080;
+}
+
+.secondHeader{
+  font-size:32px;
+  font-weight: bold;
+  fill:#1A4B7A;
+}
+
+.verticalLabel{
+  font-size: 1.2em;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.chartContainer{
+  stroke-width:2; 
+  stroke:#02869B;
+  fill:none;
+}
+
+.chartContainerTitleBG{
+  fill:#02869B;
+}
+
+.chartContainerTitleTxt{
+  fill:#fff;
+  font-weight: bold;
+  font-size: 1.3em;
+  text-shadow:0 0 3px #000;
+}
+
+.chartContainerBG{
+  fill:#fff;
+}
+
+.chartLbl{
+  fill:#C9C9CB;
+}
+
+.chartLblTxt{
+  font-weight:bold;
+  font-size: 1.2em;
+  fill:#1A4B7A;
+}
+
+.sub{
+  font-size: 0.6em;
+  font-weight: bold;
+  fill:#fff;
+}
+
+.gridLine{
+  stroke-width:2;
+  stroke:#dedede;
+}
+
+.potatoValue{
+  fill:white;
+  font-size: 1.5em;
+}
+
+.potatoTitle{
+  fill:#1A4B7A;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+
+.curve{
+  stroke:black;
+}
+
+.rectLabel{
+  fill:#000;
+}

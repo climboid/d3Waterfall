@@ -1,6 +1,6 @@
 function createWaterfall(wtf){
   var chart = {},
-      chart_width = wtf.rowLabels ? wtf.width + 135 : wtf.width,
+      chart_width = wtf.width,
       chart_height= wtf.height;
   // //
   // //create the SVG container for the chart(s)
@@ -13,49 +13,15 @@ function createWaterfall(wtf){
   // //
   // // add the necessary constants
   // //
-
-  if(wtf.rowLabels){
-    wtf.startX = 135;
-  }else{
-    wtf.startX = 1;
-  }
-
-  if(wtf.startX){
-    wtf.xPadding = wtf.width/2;
-    wtf.chartStartY = 80;
-    wtf.chartEndY = 525;
-    wtf.waterfallChartWidth = 75;
-    wtf.axisWidth = 1;
-    wtf.rectGutter = 5;
-  }
-
-
-  //
-  // rowLabels
-  //
-
-
-  if(wtf.rowLabels){
-    chart.svg.selectAll(".chartContainerTitleTxt")
-      .data(wtf.rowLabels)
-      .enter().append("text")
-      .attr("class","chartContainerTitleTxt")
-      .attr("x",wtf.startX - 85)
-      .attr("y",function(d){ return d.y + 32})
-      .text(function(d){ return d.name })
-        .append("tspan")
-        .attr("x",function(d){return d.x + 51})
-        .attr("y",function(d){ return d.y + 25})
-        .attr("class","sub")
-        .text(function(d){ return d.sub});
-  }
   
-  //
-  // chart container
-  //
-
-
-
+  wtf.startX = 1;
+  wtf.xPadding = wtf.width/2;
+  wtf.chartStartY = 80;
+  wtf.chartEndY = 525;
+  wtf.waterfallChartWidth = 75;
+  wtf.axisWidth = 1;
+  wtf.rectGutter = 5;
+  
 
   //
   //horizontal grid lines
@@ -152,7 +118,10 @@ function createWaterfall(wtf){
       else return "steelblue";
 
     })
-    .attr("height",gutterGrid- wtf.rectGutter*2)
+    .attr("height",function(d){
+      d.rectH = gutterGrid- wtf.rectGutter*2;
+      return d.rectH;
+    })
     .attr("class","waterfallRect");
 
   //
@@ -222,7 +191,7 @@ function createWaterfall(wtf){
   //   .attr("class","connectors")
   //   .attr("x1",function(d,i){ 
   //     if(i == wtf.series.length -2){
-  //       return wtf.xPadding + xScale(d.start) + wtf.axisWidth;
+  //       // return wtf.xPadding + xScale(d.start) + wtf.axisWidth;
   //     }
   //     if(i == wtf.series.length-1){
   //       //return wtf.xPadding + xScale(d.start) + wtf.axisWidth + xScale(d.width)-1;  
@@ -234,8 +203,8 @@ function createWaterfall(wtf){
       
   //   })
   //   .attr("y1",function(d,i){ 
-  //     if(i == 0) return 150
-  //     if(i == wtf.series.length-1 || wtf.series.length - 2) return
+  //     if(i == 0) return 
+  //     if(i == wtf.series.length-1 ) return
   //     else return wtf.horizontalGridLines[i-1].y1 + wtf.rectGutter + 65;
   //   })
   //   .attr("x2",function(d,i){
@@ -251,8 +220,8 @@ function createWaterfall(wtf){
   //     }
   //   })
   //   .attr("y2",function(d,i){ 
-  //     if(i == 0) return 160  
-  //     if(i == wtf.series.length -1 || wtf.series.length - 2)return
+  //     if(i == 0) return   
+  //     if(i == wtf.series.length -1 )return
   //     else return wtf.horizontalGridLines[i-1].y1 + wtf.rectGutter + 75;
   //   })
   //   .attr("stroke-width",1.5)

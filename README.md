@@ -1,7 +1,18 @@
 D3 WATERFALL CHART
 ===================
 You basically provide an object to the Waterfall function and it will spit out a waterfall chart.
-Conf object is as below
+You will need a container in you HTML which ID matches the container property of the config object like so
+<pre>
+  <code>
+    .
+    .
+    <body>
+      <div id="chart"></div>
+      <script src="libs/d3.v3.min.js"></script>
+    </body>
+  </code>
+</pre>
+Once the HTML is set you create the config object as follows
 <pre>
   <code>
   var waterfall = {
@@ -15,17 +26,20 @@ Conf object is as below
         {'value':253},
         {'value':417},
         {'value':1440},
-        {'value':-1918},
-        {'value':30},
-        {'value':222},
-        {'value':253},
-        {'value':417},
-        {'value':1440},
-        {'value':-1918},
-        {'value':30},
-        {'value':222}
+        .
+        .
+        .
+        .
       ]
     }
+  </code>
+</pre>
+
+After creating the conf object you simply pass it as a parameter to createWaterfall() function like so
+
+<pre>
+  <code>
+    createWaterfall(waterfall);
   </code>
 </pre>
 

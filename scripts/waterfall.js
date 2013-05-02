@@ -1,6 +1,6 @@
 function createWaterfall(wtf){
   var chart = {},
-      chart_width = wtf.rowLabels ? wtf.width + 565 : wtf.width,
+      chart_width = wtf.rowLabels ? wtf.width + 135 : wtf.width,
       chart_height= wtf.height;
   // //
   // //create the SVG container for the chart(s)
@@ -16,12 +16,8 @@ function createWaterfall(wtf){
 
   if(wtf.rowLabels){
     wtf.startX = 135;
-    wtf.endX = 540;
-    wtf.endChartX = 540;
   }else{
     wtf.startX = 1;
-    wtf.endX = 540;
-    wtf.endChartX = 400;
   }
 
   if(wtf.startX){
@@ -172,12 +168,19 @@ function createWaterfall(wtf){
     .attr("y",function(d,i){ return i == 0 ? wtf.chartStartY : (i*69)+(wtf.chartStartY+(i*8)) })
       .append("rect")
       .attr("x",function(d,i){ 
-        return (wtf.xPadding + xScale(d.start)) + (xScale(d.width)/7) 
+        var xPos = (wtf.xPadding + xScale(d.start)) + (xScale(d.width)/7);
+        d.xPos = xPos;
+        return xPos;
       })
       .attr("y",function(d,i){ 
-        return wtf.horizontalGridLines[i].y1 + gutterGrid/2 - wtf.fontSize + 2;
+        var yPos = wtf.horizontalGridLines[i].y1 + gutterGrid/2 - wtf.fontSize + 2;
+        d.yPos = yPos;
+        return yPos;
       })
-      .attr("height",20)
+      .attr("height",function(){
+        if((wtf.height/wtf.series.length)/4 < 9) return 12;
+        else return (wtf.height/wtf.series.length)/4
+      })
       .attr("fill",function(d){
         return "white"
       })
@@ -190,17 +193,23 @@ function createWaterfall(wtf){
   chart.svg.selectAll(".lblRect")
     .data(wtf.series)
     .enter().append("text")
-    .attr("class","rectLabel")
     .attr("x",function(d,i){ 
-      if(d.value<0){
-        return wtf.xPadding + xScale(d.start) + d.value.toString().length*2+2;
-      }else{
-        return wtf.xPadding + xScale(d.start)+d.value.toString().length+2;
-      }
+      return d.xPos+2;
     })
     .attr("dx",2)
-    .attr("y",function(d,i){ 
-      return wtf.horizontalGridLines[i].y1 + gutterGrid/2+wtf.fontSize;
+    .style("font-size",function(d){
+      var fSize;
+      if((wtf.height/wtf.series.length)/4 < 9) fSize = 10;
+      else fSize = (wtf.height/wtf.series.length)/4;
+
+      d.fSize = fSize;
+      return fSize;
+    })
+    .attr("y",function(d,i){
+      if(d.fSize == 10) return d.yPos + d.fSize;
+      else
+        return d.yPos + d.fSize-3;
+      
     })
     .text(function(d){return formatValue(d.value)})
 

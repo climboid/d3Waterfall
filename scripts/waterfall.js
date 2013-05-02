@@ -1,59 +1,3 @@
-function createWaterfallSlideTitles(obj){
-  var chart = {},
-      chart_width = 1024,
-      chart_height= 150;
-  //
-  //create the SVG container for the titles(s)
-  //
-
-  chart.svg = d3.select('#'+obj.container)
-      .append("svg")
-      .attr("width", chart_width)
-      .attr("height", chart_height);
-
-  //
-  // add the slide titles
-  //
-
-  if(obj.title1){
-    chart.svg.append("text")
-      .attr("x",0)
-      .attr("y",20)
-      .attr("class","firstHeader")
-      .text(obj.title1);    
-  }
-
-  if(obj.title2){
-    chart.svg.append("text")
-      .attr("x",0)
-      .attr("y",52)
-      .attr("class","secondHeader")
-      .text(obj.title2);  
-  }
-
-  if(obj.title3){
-    chart.svg.append("text")
-      .attr("x",0)
-      .attr("y",80)
-      .attr("class","firstHeader")
-      .text(obj.title3);  
-  }
-
-  if(obj.title4){
-    chart.svg.append("text")
-      .attr("x",0)
-      .attr("y",112)
-      .attr("class","secondHeader")
-      .text(obj.title4);
-  }
-}
-
-//
-//
-// the waterfall chart
-//
-//
-
 function createWaterfall(wtf){
   var chart = {},
       chart_width = wtf.pills ? 565 : 440,
@@ -96,17 +40,6 @@ function createWaterfall(wtf){
 
 
   if(wtf.pills){
-    chart.svg.selectAll(".chartLbl")
-      .data(wtf.pills)
-      .enter().append("rect")
-      .attr("class","chartLbl")
-      .attr("x",wtf.startX - 90)
-      .attr("y",function(d){ return d.y})
-      .attr("width",100)
-      .attr("height",50)
-      .attr("rx",7)
-      .attr("ry",7);
-
     chart.svg.selectAll(".chartContainerTitleTxt")
       .data(wtf.pills)
       .enter().append("text")
@@ -119,15 +52,6 @@ function createWaterfall(wtf){
         .attr("y",function(d){ return d.y + 25})
         .attr("class","sub")
         .text(function(d){ return d.sub});
-  }
-
-  if(wtf.yAxisLabel){
-    chart.svg.append("text")
-      .attr("x",10)
-      .attr("y",400)
-      .attr("class","verticalLabel")
-      .attr("transform","rotate(270 20,400)")
-      .text("Diffferences in ... 2")  
   }
   
   //
@@ -145,78 +69,6 @@ function createWaterfall(wtf){
     .attr("height",wtf.endX + 10)
     .attr("rx",wtf.borderRadius)
     .attr("ry",wtf.borderRadius);
-
-  chart.svg.selectAll(".chartContainerTitleBG")
-    .data(wtf.chartContainerTitles)
-    .enter().append("rect")
-    .attr("class","chartContainerTitleBG")
-    .attr("x",wtf.startX)
-    .attr("y",0)
-    .attr("width",wtf.endX - 115)
-    .attr("height",80)
-    .attr("rx",wtf.borderRadius)
-    .attr("ry",wtf.borderRadius);
-
-  chart.svg.selectAll(".chartTitles")
-    .data(wtf.chartContainerTitles)
-    .enter().append("text")
-    .attr("x",wtf.startX +15)
-    .attr("y",30)
-    .attr("class","chartContainerTitleTxt")
-      .append("tspan")
-      .attr("x",wtf.startX + 15)
-      .attr("y",30)
-      .text(function(d){return d.title})
-      .append("tspan")
-      .attr("x",wtf.startX + 15)
-      .attr("y",55)
-      .text(function(d){return d.title2});
-
-  //
-  // this background is needed in order to slice the 
-  // bottom rounded corners of bot the title
-  // and the pills
-  //
-  // left chart white background
-  if(wtf.chartContainerTitles){
-    chart.svg.selectAll(".chartContainerBG")
-      .data(wtf.chartContainerTitles)
-      .enter().append("rect")
-      .attr("x",wtf.startX + 1) 
-      .attr("y",70)
-      .attr("width",wtf.endX - 117) 
-      .attr("height",wtf.endX - 100)
-      .attr("class","chartContainerBG");  
-  }
-  
-
-  //
-  // inner chart pills
-  //
-
-  if(wtf.innerChartPills){
-    chart.svg.selectAll(".innerPills")
-      .data(wtf.innerChartPills)
-      .enter().append("rect")
-      .attr("class","chartLbl")
-      .attr("x",wtf.startX + 10)
-      .attr("y",function(d){return d.y})
-      .attr("width",100)
-      .attr("height",50)
-      .attr("rx",7)
-      .attr("ry",7);
-
-    chart.svg.selectAll(".chartLblTxt")
-      .data(wtf.innerChartPills)
-      .enter().append("text")
-      .attr("class","chartLblTxt")
-      .attr("x",wtf.startX + 15)
-      .attr("y",function(d){return d.y + 30})
-      .attr("dx",function(d){return d.dx})
-      .text(function(d){return d.name}); 
-  }
-  
-
 
   //
   //horizontal grid lines
@@ -431,70 +283,7 @@ function createWaterfall(wtf){
 
 
 
-  //
-  // acum potato with bezier curves
-  //
-
-  if(wtf.beziers){
-
-    wtf.beziers = [
-      {"x1":wtf.endChartX - 120, "x2":wtf.endChartX - 110, "y1":155, "y2":160},
-      {"x1":wtf.endChartX - 110, "x2":wtf.endChartX - 110, "y1":160, "y2":300},
-      {"x1":wtf.endChartX - 110, "x2":wtf.endChartX - 100, "y1":300, "y2":305},
-      {"x1":wtf.endChartX - 100, "x2":wtf.endChartX - 110, "y1":305, "y2":310},
-      {"x1":wtf.endChartX - 110, "x2":wtf.endChartX - 110, "y1":310, "y2":450},
-      {"x1":wtf.endChartX - 110, "x2":wtf.endChartX - 120, "y1":450, "y2":455}
-    ]
-    chart.svg.selectAll(".curve")
-      .data(wtf.beziers)
-      .enter().append("line")
-      .attr("class","curve")
-      .attr("x1",function(d){ return d.x1 })
-      .attr("x2",function(d){ return d.x2 })
-      .attr("y1",function(d){ return d.y1 })
-      .attr("y2",function(d){ return d.y2 })
-
-
-
-    // get the value for the potato
-    var sumOfData = [];
-    for(var i=1; i<wtf.series.length-1; i++){ sumOfData.push(wtf.series[i]) };
-    sumOfData = d3.sum(sumOfData, function(d) { return d.value });
-
-    //potato
-    chart.svg.append("ellipse")
-      .attr("cx",wtf.startX + 360)
-      .attr("cy",(wtf.chartEndY - wtf.chartStartY*2.8))
-      .attr("rx",50)
-      .attr("ry",25)
-      .style("fill", function(){ 
-        return sumOfData > 0 ? "#1e9e53" : "#c4322e" 
-      });
-
-    // potato value
-    chart.svg.append("text")
-      .attr("x",function(){
-        var v = sumOfData.toString()
-        return v.length > 3 ? wtf.startX + 315 : wtf.startX +  340;
-      })
-      .attr("y",(wtf.chartEndY - wtf.chartStartY*2.7))
-      .attr("class","potatoValue")
-      .text(function(){return sumOfData > 0 ? "+ "+formatValue(sumOfData) : "- "+Math.abs(formatValue(sumOfData))})
-
-    // potato title
-    chart.svg.append("text")
-      .attr("x",wtf.startX + 320)
-      .attr("y",(wtf.chartEndY - wtf.chartStartY*2.2))
-      .attr("class","potatoTitle")
-      .append("tspan")
-      .attr("x",wtf.startX + 320)
-      .attr("y",(wtf.chartEndY - wtf.chartStartY*2.2))
-      .text(wtf.potatoLbl[0])
-      .append("tspan")
-      .attr("x",wtf.startX + 320)
-      .attr("y",(wtf.chartEndY - wtf.chartStartY*1.9))
-      .text(wtf.potatoLbl[1]); 
-  }
+  
   
 
 }

@@ -21,7 +21,7 @@ function createWaterfall(wtf){
   }
 
   if(wtf.startX){
-    wtf.xPadding = wtf.startX + 185;
+    wtf.xPadding = wtf.width/2;
     wtf.chartStartY = 80;
     wtf.chartEndY = 525;
     wtf.waterfallChartWidth = 75;

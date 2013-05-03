@@ -1,5 +1,6 @@
 D3 WATERFALL CHART
 ===================
+v.0.0.1
 You basically provide an object to the Waterfall function and it will spit out a waterfall chart.
 You will need a container in you HTML which ID matches the container property of the config object like so
 <pre>

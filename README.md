@@ -47,3 +47,7 @@ After creating the conf object you simply pass it as a parameter to createWaterf
 #Todos
 - Need to add support for labels on each row
 - Need to add connectors
+- Add config for colors
+- Add config for format
+- Add config for horizontal display
+- Add config for animation

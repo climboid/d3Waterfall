@@ -21,6 +21,10 @@ function createWaterfall(wtf){
   wtf.waterfallChartWidth = wtf.width/2.5;
   wtf.axisWidth = 1;
   wtf.rectGutter = 5;
+
+  if(!wtf.colors){
+    wtf.colors["#C4322E","steelblue","rgb(204,204,204)"]
+  }
   
 
   //
@@ -120,9 +124,9 @@ function createWaterfall(wtf){
       return xScale(d.width) 
     })
     .attr("fill",function(d,i){
-      if(i == wtf.series.length -1 || i == 0) return "#CCCCCC"; //first and last bars are gray
-      if(d.value < 0) return "#C4322E";
-      else return "steelblue";
+      if(i == wtf.series.length -1 || i == 0) return wtf.colors[2]; //first and last bars are gray
+      if(d.value < 0) return wtf.colors[0];
+      else return wtf.colors[1];
 
     })
     .attr("height",function(d){

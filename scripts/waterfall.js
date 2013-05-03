@@ -25,6 +25,10 @@ function createWaterfall(wtf){
   if(!wtf.colors){
     wtf.colors["#C4322E","steelblue","rgb(204,204,204)"]
   }
+
+  if(!wtf.connectorColor){
+    wtf.connectorColor = "#d3d3d3";
+  }
   
 
   //
@@ -124,7 +128,7 @@ function createWaterfall(wtf){
       return xScale(d.width) 
     })
     .attr("fill",function(d,i){
-      if(i == wtf.series.length -1 || i == 0) return wtf.colors[2]; //first and last bars are gray
+      if(i == wtf.series.length -1) return wtf.colors[2]; //first and last bars are gray
       if(d.value < 0) return wtf.colors[0];
       else return wtf.colors[1];
 
@@ -203,47 +207,30 @@ function createWaterfall(wtf){
   //
   // the waterfall connectors between the rectangles
   //
-  // chart.svg.selectAll(".connectors")
-  //   .data(wtf.series)
-  //   .enter().append("line")
-  //   .attr("class","connectors")
-  //   .attr("x1",function(d,i){ 
-  //     if(i == wtf.series.length -2){
-  //       // return wtf.xPadding + xScale(d.start) + wtf.axisWidth;
-  //     }
-  //     if(i == wtf.series.length-1){
-  //       //return wtf.xPadding + xScale(d.start) + wtf.axisWidth + xScale(d.width)-1;  
-  //     }else if(xScale(d.value)>0){
-  //       return wtf.xPadding + xScale(d.start) + wtf.axisWidth + xScale(d.width)-1;  
-  //     }else if(xScale(d.value)<0){
-  //       return wtf.xPadding + xScale(d.start);  
-  //     }
-      
-  //   })
-  //   .attr("y1",function(d,i){ 
-  //     if(i == 0) return 
-  //     if(i == wtf.series.length-1 ) return
-  //     else return wtf.horizontalGridLines[i-1].y1 + wtf.rectGutter + 65;
-  //   })
-  //   .attr("x2",function(d,i){
-  //     if(i == wtf.series.length -2){
-  //       return wtf.xPadding + xScale(d.start) + wtf.axisWidth;
-  //     }
-  //     if(i == wtf.series.length-1){
-  //       //return wtf.xPadding + xScale(d.start) + wtf.axisWidth + xScale(d.width)-1;  
-  //     }else if(xScale(d.value)>0){
-  //       return wtf.xPadding + xScale(d.start) + wtf.axisWidth + xScale(d.width)-1;  
-  //     }else if(xScale(d.value)<0){
-  //       return wtf.xPadding + xScale(d.start);  
-  //     }
-  //   })
-  //   .attr("y2",function(d,i){ 
-  //     if(i == 0) return   
-  //     if(i == wtf.series.length -1 )return
-  //     else return wtf.horizontalGridLines[i-1].y1 + wtf.rectGutter + 75;
-  //   })
-  //   .attr("stroke-width",1.5)
-  //   .attr("stroke","#D3D3D3")
+  chart.svg.selectAll(".connectors")
+    .data(wtf.series)
+    .enter().append("line")
+    .attr("class","connectors")
+    .attr("x1",function(d,i){ 
+      if(i == wtf.series.length -1 || i == wtf.series.length - 2) return;
+      if(d.value<0) return wtf.xPadding + xScale(d.start);
+      return wtf.xPadding + xScale(d.start) + xScale(d.width);
+    })
+    .attr("y1",function(d,i){ 
+      if(i == wtf.series.length -1 || i == wtf.series.length - 2) return;
+      return wtf.horizontalGridLines[i+1].y1 - wtf.rectGutter;
+    })
+    .attr("x2",function(d,i){
+      if(i == wtf.series.length -1 || i == wtf.series.length - 2) return;
+      if(d.value<0) return wtf.xPadding + xScale(d.start);
+     return wtf.xPadding + xScale(d.start) + xScale(d.width);
+    })
+    .attr("y2",function(d,i){ 
+      if(i == wtf.series.length -1 || i == wtf.series.length - 2) return;
+      return wtf.horizontalGridLines[i+1].y1 + wtf.rectGutter;
+    })
+    .attr("stroke-width",1.5)
+    .attr("stroke",wtf.connectorColor)
 
 
 

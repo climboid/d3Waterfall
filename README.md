@@ -1,6 +1,6 @@
 D3 WATERFALL CHART
 ===================
-<p>v.0.0.1</p>
+<p>v.0.0.2</p>
 <p>
 You basically provide an object to the Waterfall function and it will spit out a waterfall chart.
 You will need a container in you HTML which ID matches the container property of the config object like so
@@ -46,8 +46,6 @@ After creating the conf object you simply pass it as a parameter to createWaterf
 
 #Todos
 - Need to add support for labels on each row
-- Need to add connectors
-- Add config for colors
 - Add config for format
 - Add config for horizontal display
 - Add config for animation

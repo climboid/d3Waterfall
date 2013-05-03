@@ -18,7 +18,7 @@ function createWaterfall(wtf){
   wtf.xPadding = wtf.width/2;
   wtf.chartStartY = 80;
   wtf.chartEndY = 525;
-  wtf.waterfallChartWidth = 75;
+  wtf.waterfallChartWidth = wtf.width/2.5;
   wtf.axisWidth = 1;
   wtf.rectGutter = 5;
   
@@ -106,12 +106,19 @@ function createWaterfall(wtf){
     .data(wtf.series)
     .enter().append("rect")
     .attr("x",function(d,i){ 
+      if(i==wtf.series.length - 1 && d.value > 0){
+        return wtf.xPadding + xScale(0) + wtf.axisWidth;
+      }else if(i == wtf.series.length - 1 && d.value < 0){
+        return wtf.xPadding + xScale(0) - xScale(d.width) - wtf.axisWidth;
+      }
       return wtf.xPadding + xScale(d.start) 
     })
     .attr("y",function(d,i){ 
       return wtf.horizontalGridLines[i].y1 + wtf.rectGutter;
     })
-    .attr("width",function(d){ return xScale(d.width) })
+    .attr("width",function(d){ 
+      return xScale(d.width) 
+    })
     .attr("fill",function(d,i){
       if(i == wtf.series.length -1 || i == 0) return "#CCCCCC"; //first and last bars are gray
       if(d.value < 0) return "#C4322E";
@@ -136,8 +143,15 @@ function createWaterfall(wtf){
     .attr("x",function(d){ return wtf.xPadding + xScale(d.start) })
     .attr("y",function(d,i){ return i == 0 ? wtf.chartStartY : (i*69)+(wtf.chartStartY+(i*8)) })
       .append("rect")
-      .attr("x",function(d,i){ 
-        var xPos = (wtf.xPadding + xScale(d.start)) + (xScale(d.width)/7);
+      .attr("x",function(d,i){
+        var xPos;
+        if(i== wtf.series.length - 1 && d.value > 0){
+          xPos = wtf.xPadding + xScale(0)+ wtf.axisWidth + 2;
+        }else if( i == wtf.series.length - 1 && d.value < 0){
+          xPos = wtf.xPadding + xScale(0) - xScale(d.width) - wtf.axisWidth;
+        }else{
+          xPos = (wtf.xPadding + xScale(d.start)) + (xScale(d.width)/7);
+        }
         d.xPos = xPos;
         return xPos;
       })
@@ -170,7 +184,7 @@ function createWaterfall(wtf){
       var fSize;
       if((wtf.height/wtf.series.length)/4 < 9) fSize = 10;
       else fSize = (wtf.height/wtf.series.length)/4;
-
+      if(fSize > 24) fSize = 24 //caps the font at 24
       d.fSize = fSize;
       return fSize;
     })

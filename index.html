@@ -15,7 +15,8 @@
   
   <script src="scripts/waterfall.js"></script>
   <script>
-  var waterfall = {
+
+    d3.createWaterfall({
       container:'chart',
       width:200,
       height:800,
@@ -38,9 +39,7 @@
         {'value':30},
         {'value':222}
       ]
-    };
-
-    createWaterfall(waterfall);
+    });
 
 
   </script>

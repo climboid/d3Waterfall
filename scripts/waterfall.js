@@ -1,4 +1,4 @@
-function createWaterfall(wtf){
+d3.createWaterfall = function(wtf){
   var chart = {},
       chart_width = wtf.width,
       chart_height= wtf.height;

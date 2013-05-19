@@ -7,41 +7,42 @@
   <link rel="stylesheet" type="text/css" href="styles/waterfallChart.css">
 </head>
 <body>
-  <div id="slideTitle"></div>
   <div id="chart" class="waterfallChart"></div>
-  <div id="chart2" class="waterfallChart"></div>
-  <div class="clearfix"></div>
 
   
-  <script src="scripts/waterfall.js"></script>
+  <script src="scripts/waterfall2.js"></script>
   <script>
 
-    d3.createWaterfall({
-      container:'chart',
-      width:200,
-      height:800,
-      fontSize:10,
-      borderRadius:5,
-      horizontalGridLines:true,
-      colors:["#C4322E","steelblue","rgb(204,204,204)"], //negatives, positives, sum
-      connectorColor:"#ff0000",
-      series:[
-        {'value':253},
-        {'value':417},
-        {'value':1440},
-        {'value':-1918},
-        {'value':30},
-        {'value':222},
-        {'value':253},
-        {'value':417},
-        {'value':1440},
-        {'value':-1918},
-        {'value':30},
-        {'value':222}
-      ]
-    });
-
-
+      d3.createWaterfall({
+        container:'chart',
+        width:200,
+        height:400,
+        fontSize:10,
+        borderRadius:5,
+        xPadding:5,
+        gutter:5,
+        showValues:true,
+        horizontalGridLines:true,
+        axis:{
+          'color':'#ccc',
+          'width':2
+        },
+        colors:{
+          'positive':'steelblue',
+          'negative':'#ff0000',
+          'sum':'#c4322e'
+        },
+        connectorColor:"#ff0000",
+        series:[
+          {'value':10},
+          {'value':20},
+          {'value':30},
+          {'value':40},
+          {'value':50},
+          {'value':-50},
+          {'value':100},
+        ]
+      });
   </script>
 </body>
 </html>
